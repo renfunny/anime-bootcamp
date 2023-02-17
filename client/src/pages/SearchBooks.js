@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { saveBook, searchGoogleBooks, options } from '../utils/API';
+import { saveBook, searchGoogleBooks, anime } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 import { useMutation } from '@apollo/react-hooks';
-import {SAVE_BOOK} from "../utils/mutation";
+import { SAVE_BOOK } from "../utils/mutation";
 
 const SearchBooks = () => {
   // create state for holding returned google api data
@@ -16,12 +16,12 @@ const SearchBooks = () => {
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
   //create state to hold saved books and possible erros
-  const [saveBook, {error}] = useMutation(SAVE_BOOK);
+  const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
-    return () => options
+    return () => anime
     // saveBookIds(savedBookIds);
   });
 
@@ -34,21 +34,27 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await searchGoogleBooks(searchInput);
-
+      const response = await anime(searchInput);
+      // console.log(anime,'anime');
+      // console.log(response,'response');
       if (!response.ok) {
         throw new Error("something went wrong!");
       }
 
-      const { items } = await response.json();
+      const items = await response.json();
+      //console.log(items, 'items')
+      const bookData = items.data.map((book) => (
+        {
+          bookId: book._id,
+          authors: book.status || ["No author to display"],
+          title: book.title,
+          description: book.synopsis,
+          image: book.image || "",
+          link: book.link
+        }
+      ));
 
-      const bookData = items.map((book) => ({
-        bookId: book.id,
-        authors: book.volumeInfo.authors || ["No author to display"],
-        title: book.volumeInfo.title,
-        description: book.volumeInfo.description,
-        image: book.volumeInfo.imageLinks?.thumbnail || "",
-      }));
+      //console.log(bookData, 'bookdata');
 
       setSearchedBooks(bookData);
       setSearchInput("");
@@ -70,7 +76,7 @@ const SearchBooks = () => {
     }
 
     try {
-      const {data} = await saveBook({variables: {input: {...bookToSave}}});
+      const { data } = await saveBook({ variables: { input: { ...bookToSave } } });
 
       if (error) {
         throw new Error("something went wrong!");
@@ -87,7 +93,7 @@ const SearchBooks = () => {
     <>
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
-          <h1>Search for Books!</h1>
+          <h1>Search for Anime!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -125,7 +131,7 @@ const SearchBooks = () => {
                 ) : null}
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
-                  <p className='small'>Authors: {book.authors}</p>
+                  <p className='small'>Status: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
@@ -133,10 +139,13 @@ const SearchBooks = () => {
                       className='btn-block btn-info'
                       onClick={() => handleSaveBook(book.bookId)}>
                       {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
-                        ? 'This book has already been saved!'
-                        : 'Save this Book!'}
+                        ? 'This anime has already been saved!'
+                        : 'Save this Anime!'}
                     </Button>
+
                   )}
+                  {/* Added a button for the web page link */}
+                  <a href={book.link}><button>Details</button></a>
                 </Card.Body>
               </Card>
             );
