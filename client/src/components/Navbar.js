@@ -21,13 +21,28 @@ const AppNavbar = () => {
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
               <Nav.Link as={Link} to='/'>
+                Home
+              </Nav.Link>
+              <Nav.Link as={Link} to='/searchManga'>
+                Search For Manga
+              </Nav.Link>
+              <Nav.Link as={Link} to='/topManga'>
+                Top Manga
+              </Nav.Link>
+              <Nav.Link as={Link} to='/search'>
                 Search For Anime
+              </Nav.Link>
+              <Nav.Link as={Link} to='/topAnime'>
+                Top Anime
               </Nav.Link>
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>
                     See Your Anime
+                  </Nav.Link>
+                  <Nav.Link as={Link} to='/savedManga'>
+                    See Your Manga
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
