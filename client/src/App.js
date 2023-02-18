@@ -1,10 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import HomePage from "./pages/HomePage";
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 import {ApolloProvider,ApolloClient,InMemoryCache,createHttpLink} from "@apollo/client";
 import {setContext} from '@apollo/client/link/context'
+import SearchManga from './pages/SearchManga';
+import SavedManga from './pages/SavedManga';
+import TopAnime from './pages/TopAnime';
+import TopManga from './pages/TopManga';
 
 
 // const client = new ApolloClient({
@@ -53,8 +58,13 @@ function App() {
       <>
         <Navbar />
         <Switch>
-          <Route exact path='/' component={SearchBooks} />
+          <Route exact path='/' component={HomePage} />
+          <Route exact path='/search' component={SearchBooks} />
           <Route exact path='/saved' component={SavedBooks} />
+          <Route exact path='/searchManga' component={SearchManga} />
+          <Route exact path='/savedManga' component={SavedManga} />
+          <Route exact path='/topAnime' component={TopAnime} />
+          <Route exact path='/topManga' component={TopManga} />
           <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
         </Switch>
       </>

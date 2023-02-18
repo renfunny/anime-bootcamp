@@ -8,6 +8,7 @@ type User{
     email: String
     bookCount: Int
     savedBooks: [Book]
+    reviews:[Review]
 }
 
 type Book{
@@ -33,13 +34,23 @@ input booksInput {
     link: String
 }
 
+type Review{
+    _id:ID
+    reviewContent:String
+    reviewerName:String
+}
+
 type Query {
     me: User
+   reviews(username:String!):[Review]
+    review(reviewId:ID!):Review
 }
 
 type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
+    addReview(reviewContent:String!): Review
+    deleteReview(reviewId:ID!):Review
     saveBook(input: booksInput): User
     removeBook(bookId: String!): User
 }
