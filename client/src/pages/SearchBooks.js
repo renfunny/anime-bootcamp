@@ -54,7 +54,7 @@ const SearchBooks = () => {
         }
       ));
 
-      //console.log(bookData, 'bookdata');
+      // console.log(bookData, 'bookdata');
 
       setSearchedBooks(bookData);
       setSearchInput("");
@@ -145,7 +145,11 @@ const SearchBooks = () => {
 
                   )}
                   {/* Added a button for the web page link */}
-                  <a href={book.link}><button>Details</button></a>
+                  <a href="#"><button  value={book.title} onClick={(event)=>{
+                    event.preventDefault(); console.log(event.target.value)
+                  if(event.target.value=== book.title){
+                    console.log(book)
+                  }}}>Details</button></a>
                 </Card.Body>
               </Card>
             );
