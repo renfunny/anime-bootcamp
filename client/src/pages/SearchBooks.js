@@ -73,7 +73,7 @@ const SearchBooks = () => {
         link: book.link,
       }));
 
-      //console.log(bookData, 'bookdata');
+      // console.log(bookData, 'bookdata');
 
       setSearchedBooks(bookData);
       setSearchInput("");
