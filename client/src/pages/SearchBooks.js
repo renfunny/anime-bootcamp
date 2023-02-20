@@ -157,34 +157,36 @@ const SearchBooks = () => {
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Status: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
-                  {Auth.loggedIn() && (
-                    <Button
-                      disabled={savedBookIds?.some(
-                        (savedBookId) => savedBookId === book.bookId
-                      )}
-                      className="btn-block btn-info"
-                      onClick={() => handleSaveBook(book.bookId)}
-                    >
-                      {savedBookIds?.some(
-                        (savedBookId) => savedBookId === book.bookId
-                      )
-                        ? "This anime has already been saved!"
-                        : "Save this Anime!"}
-                    </Button>
-                  )}
-                  {/* Added a button for the web page link */}
+                  <Card.Text>{book.description.slice(0, 100)}...</Card.Text>
+                  <div className="card-buttons">
+                    {Auth.loggedIn() && (
+                      <Button
+                        disabled={savedBookIds?.some(
+                          (savedBookId) => savedBookId === book.bookId
+                        )}
+                        className="btn-block btn-info"
+                        onClick={() => handleSaveBook(book.bookId)}
+                      >
+                        {savedBookIds?.some(
+                          (savedBookId) => savedBookId === book.bookId
+                        )
+                          ? "This anime has already been saved!"
+                          : "Save this Anime!"}
+                      </Button>
+                    )}
+                    {/* Added a button for the web page link */}
 
-                  <button
-                    style={{ margin: "2px 0 0 0", border: "none" }}
-                    className="btn-block btn-info btn btn-primary"
-                    onClick={(event) => {
-                      event.preventDefault();
-                      handleOpenModal(book);
-                    }}
-                  >
-                    Details
-                  </button>
+                    <button
+                      style={{ margin: "5px 0 0 0", border: "none" }}
+                      className="btn-block btn-info btn btn-primary"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        handleOpenModal(book);
+                      }}
+                    >
+                      Details
+                    </button>
+                  </div>
                 </Card.Body>
               </Card>
             );
@@ -204,7 +206,10 @@ const SearchBooks = () => {
                 <div className="modal-body">
                   {selectedAnime.description} <br></br>
                   For further details
-                  <a href={selectedAnime.link}> Click here</a>
+                  <a href={selectedAnime.link} target="_blank">
+                    {" "}
+                    Click here
+                  </a>
                 </div>
                 <div className="modal-footer">
                   <button onClick={handleCloseModal} className="close-btn">
