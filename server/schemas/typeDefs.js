@@ -7,7 +7,7 @@ type User{
     username: String
     email: String
     animeCount: Int
-    savedAnime: [Book]
+    savedAnime: [Anime]
     reviews:[Review]
 }
 
@@ -51,8 +51,8 @@ type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     addReview(reviewContent:String!): Review
     deleteReview(reviewId:ID!):Review
-    saveAnime(input: booksInput): User
-    removeAnime(bookId: String!): User
+    saveAnime(input: animeInput): User
+    removeAnime(animeId: String!): User
 }
 
 `;

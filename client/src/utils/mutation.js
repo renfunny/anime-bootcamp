@@ -1,80 +1,97 @@
 import gql from "graphql-tag";
 //mutation queries are taken from graphql playground/localhost query tester and pasted here
 export const LOGIN_USER = gql`
-    mutation loginUser($email: String!, $password: String!) {
-        login(email: $email, password: $password){
-            token
-                user{
-                    _id
-                    username
-                    email
-                    bookCount
-                    savedBooks{
-                        bookId
-                        title
-                        description
-                        authors
-                        link
-                        image
-                    }
-                }
+    mutation Login($email: String!, $password: String!) {
+        login(email: $email, password: $password) {
+        token
+        user {
+            _id
+            animeCount
+            email
+            username
+            savedAnime {
+            animeId
+            authors
+            description
+            image
+            link
+            title
+            }
+            reviews {
+            _id
+            reviewContent
+            reviewerName
+            }
         }
-    }
-`;
+        }
+    }`;
 export const ADD_USER = gql`
-    mutation addUser($username: String!, $email: String!, $password: String!){
-        addUser(username: $username, email: $email, password: $password){
-            token
-                user{
-                    _id
-                    username
-                    email
-                    bookCount
-                    savedBooks{
-                        bookId
-                        title
-                        description
-                        authors
-                        link
-                        image
-                }
-            }
-        }
-    }
-`;
-export const SAVE_BOOK = gql`
-    mutation saveBook($input: booksInput!){
-        saveBook(input: $input){
+    mutation AddUser($username: String!, $email: String!, $password: String!) {
+        addUser(username: $username, email: $email, password: $password) {
+        token
+        user {
             _id
-            username
+            animeCount
             email
-            savedBooks{
-                bookId
-                title
-                description
-                authors
-                link
-                image
+            username
+            savedAnime {
+            animeId
+            authors
+            description
+            image
+            link
+            title
             }
-        }
-    }
-`;
-export const REMOVE_BOOK = gql`
-    mutation removeBook($bookId: String!){
-        removeBook(bookId: $bookId){
+            reviews {
             _id
-            username
-            email
-            bookCount
-            savedBooks{
-                bookId
-                title
-                description
-                authors
-                link
-                image
+            reviewContent
+            reviewerName
             }
         }
-    }
-`;
+        }
+    }`;
+export const SAVE_ANIME = gql`
+    mutation SaveAnime {
+        saveAnime {
+        _id
+        animeCount
+        email
+        username
+        savedAnime {
+            animeId
+            authors
+            description
+            image
+            link
+            title
+        }
+        reviews {
+            _id
+            reviewContent
+            reviewerName
+        }
+        }
+    }`;
+export const REMOVE_ANIME = gql`
+    mutation RemoveAnime($animeId: String!) {
+        removeAnime(animeId: $animeId) {
+        _id
+        animeCount
+        email
+        username
+        savedAnime {
+            animeId
+            authors
+            description
+            image
+            link
+            title
+        }
+        reviews {
+            _id
+            reviewContent
+            reviewerName
+        }
+        }
+    }`;
 //module.exports = {LOGIN_USER, ADD_USER, SAVE_BOOK, REMOVE_BOOK};

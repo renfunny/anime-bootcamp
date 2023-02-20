@@ -87,7 +87,7 @@ const resolvers = {
         },
         removeAnime: async (parent, args, context) => {
             if (context.user) {//this can only work if the user is logged in
-                const updatedUser = await User.findOneAndUpdate({ _id: context.user._id }, { $pull: { savedAnime: { animeId: args.bookId } } }, { new: true });
+                const updatedUser = await User.findOneAndUpdate({ _id: context.user._id }, { $pull: { savedAnime: { animeId: args.animeId } } }, { new: true });
                 return updatedUser;
             };//if they are not logged in, they cannot use the feature
             throw new AuthenticationError("You need to be logged in to use this feature!");
