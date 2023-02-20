@@ -174,16 +174,17 @@ const SearchBooks = () => {
                     </Button>
                   )}
                   {/* Added a button for the web page link */}
-                  <a href="#">
-                    <button
-                      onClick={(event) => {
-                        event.preventDefault();
-                        handleOpenModal(book);
-                      }}
-                    >
-                      Details
-                    </button>
-                  </a>
+
+                  <button
+                    style={{ margin: "2px 0 0 0", border: "none" }}
+                    className="btn-block btn-info btn btn-primary"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      handleOpenModal(book);
+                    }}
+                  >
+                    Details
+                  </button>
                 </Card.Body>
               </Card>
             );
@@ -193,9 +194,18 @@ const SearchBooks = () => {
               <div className="modal-content">
                 <div className="modal-header">
                   <img src={selectedAnime.image}></img>
-                  <h4 className="modal-title">{selectedAnime.title}</h4>
+                  <div className="modal-headertext">
+                    <h4 className="modal-title">{selectedAnime.title}</h4>
+                    <h6 className="modal-status">
+                      Status:{selectedAnime.authors}
+                    </h6>
+                  </div>
                 </div>
-                <div className="modal-body">{selectedAnime.description}</div>
+                <div className="modal-body">
+                  {selectedAnime.description} <br></br>
+                  For further details
+                  <a href={selectedAnime.link}> Click here</a>
+                </div>
                 <div className="modal-footer">
                   <button onClick={handleCloseModal} className="close-btn">
                     Close

@@ -34,6 +34,11 @@ h6 {
   background-color: antiquewhite;
 }
 
+.modal-headertext {
+  display: flex;
+  flex-direction: column;
+}
+
 .modal-header .modal-footer {
   padding: 10px;
 }
