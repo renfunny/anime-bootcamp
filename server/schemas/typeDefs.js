@@ -6,13 +6,13 @@ type User{
     _id: ID
     username: String
     email: String
-    bookCount: Int
-    savedBooks: [Book]
+    animeCount: Int
+    savedAnime: [Book]
     reviews:[Review]
 }
 
-type Book{
-    bookId: String
+type Anime{
+    animeId: String
     authors: [String]
     description: String
     title: String
@@ -25,8 +25,8 @@ type Auth {
     user: User
 }
 
-input booksInput {
-    bookId: String
+input animeInput {
+    animeId: String
     authors: [String]
     description: String
     title: String
@@ -42,7 +42,7 @@ type Review{
 
 type Query {
     me: User
-   reviews(username:String!):[Review]
+    reviews(username:String!):[Review]
     review(reviewId:ID!):Review
 }
 
@@ -51,8 +51,8 @@ type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     addReview(reviewContent:String!): Review
     deleteReview(reviewId:ID!):Review
-    saveBook(input: booksInput): User
-    removeBook(bookId: String!): User
+    saveAnime(input: booksInput): User
+    removeAnime(bookId: String!): User
 }
 
 `;
