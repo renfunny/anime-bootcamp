@@ -16,7 +16,7 @@ import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 import { useMutation } from "@apollo/react-hooks";
 import { SAVE_BOOK } from "../utils/mutation";
 
-const SearchBooks = () => {
+const SearchManga = () => {
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
@@ -28,15 +28,15 @@ const SearchBooks = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [selectedAnime, setSelectedAnime] = useState(null);
+  const [selectedManga, setSelectedManga] = useState(null);
 
-  const handleOpenModal = (book) => {
-    setSelectedAnime(book);
+  const handleOpenModal = (manga) => {
+    setSelectedManga(manga);
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setSelectedAnime(null);
+    setSelectedManga(null);
     setIsModalOpen(false);
   };
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
@@ -63,19 +63,21 @@ const SearchBooks = () => {
       }
 
       const items = await response.json();
-      console.log(items, 'items')
-      const bookData = items.data.map((book) => ({
-        bookId: book._id,
-        authors: book.status || ["No author to display"],
-        title: book.title,
-        description: book.synopsis,
-        image: book.image || "",
-        link: book.link,
+      console.log(items, "items");
+      const mangaData = items.data.map((manga) => ({
+        mangaId: manga.id,
+        status: manga.attributes.status || ["No status to display"],
+        title: manga.attributes.canonicalTitle,
+        description: manga.attributes.synopsis,
+        image: manga.attributes.posterImage.original || "",
+        modalImage: manga.attributes.posterImage.original || "",
+        link: manga.links.self,
+        rating: manga.attributes.averageRating || "81.76",
       }));
 
       // console.log(bookData, 'bookdata');
 
-      setSearchedBooks(bookData);
+      setSearchedBooks(mangaData);
       setSearchInput("");
     } catch (err) {
       console.error(err);
@@ -85,7 +87,7 @@ const SearchBooks = () => {
   // create function to handle saving a book to our database
   const handleSaveBook = async (bookId) => {
     // find the book in `searchedBooks` state by the matching id
-    const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+    const bookToSave = searchedBooks.find((manga) => manga.mangaId === bookId);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -104,7 +106,7 @@ const SearchBooks = () => {
       }
 
       // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      setSavedBookIds([...savedBookIds, bookToSave.mangaId]);
     } catch (err) {
       console.error(err);
     }
@@ -114,7 +116,7 @@ const SearchBooks = () => {
     <>
       <Jumbotron fluid className="text-light bg-dark">
         <Container>
-          <h1>Search for Anime!</h1>
+          <h1>Search for Manga!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -124,7 +126,7 @@ const SearchBooks = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type="text"
                   size="lg"
-                  placeholder="Search for a book"
+                  placeholder="Search for a manga"
                 />
               </Col>
               <Col xs={12} md={4}>
@@ -144,34 +146,34 @@ const SearchBooks = () => {
             : "Search for a book to begin"}
         </h2>
         <CardColumns>
-          {searchedBooks.map((book) => {
+          {searchedBooks.map((manga) => {
             return (
-              <Card key={book.bookId} border="dark">
-                {book.image ? (
+              <Card key={manga.mangaId} border="dark">
+                {manga.image ? (
                   <Card.Img
-                    src={book.image}
-                    alt={`The cover for ${book.title}`}
+                    src={manga.image}
+                    alt={`The cover for ${manga.title}`}
                     variant="top"
                   />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
-                  <p className="small">Status: {book.authors}</p>
-                  <Card.Text>{book.description.slice(0, 100)}...</Card.Text>
+                  <Card.Title>{manga.title}</Card.Title>
+                  <p className="small">Status: {manga.status}</p>
+                  <Card.Text>{manga.description.slice(0, 100)}...</Card.Text>
                   <div className="card-buttons">
                     {Auth.loggedIn() && (
                       <Button
                         disabled={savedBookIds?.some(
-                          (savedBookId) => savedBookId === book.bookId
+                          (savedBookId) => savedBookId === manga.mangaId
                         )}
                         className="btn-block btn-info"
-                        onClick={() => handleSaveBook(book.bookId)}
+                        onClick={() => handleSaveBook(manga.mangaId)}
                       >
                         {savedBookIds?.some(
-                          (savedBookId) => savedBookId === book.bookId
+                          (savedBookId) => savedBookId === manga.mangaId
                         )
-                          ? "This anime has already been saved!"
-                          : "Save this Anime!"}
+                          ? "This manga has already been saved!"
+                          : "Save this Manga!"}
                       </Button>
                     )}
                     {/* Added a button for the web page link */}
@@ -181,7 +183,7 @@ const SearchBooks = () => {
                       className="btn-block btn-info btn btn-primary"
                       onClick={(event) => {
                         event.preventDefault();
-                        handleOpenModal(book);
+                        handleOpenModal(manga);
                       }}
                     >
                       Details
@@ -195,22 +197,18 @@ const SearchBooks = () => {
             <div className="modal">
               <div className="modal-content">
                 <div className="modal-header">
-                  <img src={selectedAnime.image}></img>
+                  <img
+                    src={selectedManga.modalImage}
+                    className="modal-manga-image"
+                  ></img>
                   <div className="modal-headertext">
-                    <h4 className="modal-title">{selectedAnime.title}</h4>
+                    <h4 className="modal-title">{selectedManga.title}</h4>
                     <h6 className="modal-status">
-                      Status:{selectedAnime.authors}
+                      Status:{selectedManga.status}
                     </h6>
                   </div>
                 </div>
-                <div className="modal-body">
-                  {selectedAnime.description} <br></br>
-                  For further details
-                  <a href={selectedAnime.link} target="_blank">
-                    {" "}
-                    Click here
-                  </a>
-                </div>
+                <div className="modal-body">{selectedManga.description}</div>
                 <div className="modal-footer">
                   <button onClick={handleCloseModal} className="close-btn">
                     Close
@@ -225,4 +223,4 @@ const SearchBooks = () => {
   );
 };
 
-export default SearchBooks;
+export default SearchManga;

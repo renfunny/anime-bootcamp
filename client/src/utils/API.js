@@ -88,13 +88,13 @@ export const manga = (query) => {
   const options = {
     method: "GET",
     headers: {
-      "Accept": "application/vnd.api+json",
+      Accept: "application/vnd.api+json",
       "Content-Type": "application/vnd.api+json",
     },
   };
 
   return fetch(
-    `https://kitsu.io/api/edge/manga?filter[text]=${query}`,
+    `https://kitsu.io/api/edge/manga?page[limit]=12&filter[text]=${query}`,
     options
   );
   // .then(response => response.json())

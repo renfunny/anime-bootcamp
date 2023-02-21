@@ -65,6 +65,10 @@ h6 {
   border-bottom: 1px solid #eee;
 }
 
+.modal-manga-image {
+  max-width: 50%;
+}
+
 button.close-btn {
   padding: 6px 20px;
   background-color: #00f2ff66;
