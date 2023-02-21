@@ -27,7 +27,7 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  color:  #00f2ff66;  
+  color: #00f2ff66;
 }
 
 .modal-content button.btn.btn-success {
@@ -36,7 +36,7 @@ h6 {
 }
 
 .modal-content {
-  width: 500px;
+  width: 50%;
   background-color: rgb(40, 37, 37);
   box-shadow: 0px 6px 20px 4px #00f2ff66;
   padding: 5px;
@@ -56,7 +56,7 @@ h6 {
 }
 
 .modal-status {
-  margin:10px;
+  margin: 10px;
 }
 
 .modal-body {
@@ -75,11 +75,11 @@ button.close-btn {
 
 /* Login Signup */
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
   color: #fff;
   background-color: #00f2ff66;
 }
-
 
 .nav-item .nav-link {
   color: #00f2fffe;
@@ -101,7 +101,7 @@ button.close-btn {
 
 .navbar-dark .navbar-nav .nav-link:hover {
   color: #00f2fffe;
-  transform: scale(1.1);  
+  transform: scale(1.1);
   transition-duration: 0.7s;
 }
 
@@ -122,11 +122,18 @@ button.btn.btn-success.btn-lg {
   width: 15%;
 }
 
-@media (max-width: 991.98px){.navbar-expand-lg>.container, .navbar-expand-lg>.container-fluid, .navbar-expand-lg>.container-lg, .navbar-expand-lg>.container-md, .navbar-expand-lg>.container-sm, .navbar-expand-lg>.container-xl {
+@media (max-width: 991.98px) {
+  .navbar-expand-lg > .container,
+  .navbar-expand-lg > .container-fluid,
+  .navbar-expand-lg > .container-lg,
+  .navbar-expand-lg > .container-md,
+  .navbar-expand-lg > .container-sm,
+  .navbar-expand-lg > .container-xl {
     padding-right: 0;
     padding-left: 0;
     flex-wrap: nowrap;
-}}
+  }
+}
 
 /* Search Results */
 .card-columns {
