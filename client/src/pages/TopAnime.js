@@ -1,63 +1,4 @@
-import React, { useState, useEffect } from "react";
-import {
-  Jumbotron,
-  Container,
-  Col,
-  Form,
-  Button,
-  Card,
-  CardColumns,
-} from "react-bootstrap";
-
-const TopAnimes = () => {
-  const [top24Animes, setTop24Animes] = useState([]);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const [selectedAnime, setSelectedAnime] = useState(null);
-
-  const handleOpenModal = (anime) => {
-    setSelectedAnime(anime);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedAnime(null);
-    setIsModalOpen(false);
-  };
-
-  useEffect(() => {
-    async function fetchData() {
-      const options = {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key":
-            "a2e2218b81msh172204e911c7de7p1a8ea0jsnc46101fc6953",
-          "X-RapidAPI-Host": "anime-db.p.rapidapi.com",
-        },
-      };
-      const response = await fetch(
-        "https://anime-db.p.rapidapi.com/anime?page=1&size=24&sortBy=ranking&sortOrder=asc",
-        options
-      );
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
-      const items = await response.json();
-
-      const animeData = items.data.map((anime) => ({
-        animeId: anime._id,
-        status: anime.status || ["No author to display"],
-        title: anime.title,
-        description: anime.synopsis,
-        image: anime.image || "",
-        link: anime.link,
-      }));
-
-      setTop24Animes(animeData);
-    }
-    fetchData();
-  }, []);
+import React from "react";
 
   return (
     <>
@@ -131,4 +72,6 @@ const TopAnimes = () => {
   );
 };
 
-export default TopAnimes;
+
+
+export default TopAnime;
