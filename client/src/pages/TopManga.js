@@ -31,7 +31,7 @@ const TopManga = () => {
       const options = {
         method: "GET",
         headers: {
-          Accept: "application/vnd.api+json",
+          "Accept": "application/vnd.api+json",
           "Content-Type": "application/vnd.api+json",
         },
       };
