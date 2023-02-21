@@ -10,28 +10,28 @@ import {
 } from "react-bootstrap";
 
 import Auth from "../utils/auth";
-import { saveBook, searchGoogleBooks, anime } from "../utils/API";
-import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
+import { saveAnime, searchGoogleBooks, anime } from "../utils/API";
+import { saveAnimeIds, getSavedAnimeIds } from "../utils/localStorage";
 
 import { useMutation } from "@apollo/react-hooks";
-import { SAVE_BOOK } from "../utils/mutation";
+import { SAVE_ANIME } from "../utils/mutation";
 
-const SearchBooks = () => {
+const SearchAnime = () => {
   // create state for holding returned google api data
-  const [searchedBooks, setSearchedBooks] = useState([]);
+  const [searchedAnime, setSearchedAnime] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState("");
-  // create state to hold saved bookId values
-  const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+  // create state to hold saved animeId values
+  const [savedAnimeIds, setSavedAnimeIds] = useState(getSavedAnimeIds());
   //create state to hold saved books and possible erros
-  const [saveBook, { error }] = useMutation(SAVE_BOOK);
+  const [saveAnime, { error }] = useMutation(SAVE_ANIME);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [selectedAnime, setSelectedAnime] = useState(null);
 
-  const handleOpenModal = (book) => {
-    setSelectedAnime(book);
+  const handleOpenModal = (anime) => {
+    setSelectedAnime(anime);
     setIsModalOpen(true);
   };
 
@@ -64,28 +64,28 @@ const SearchBooks = () => {
 
       const items = await response.json();
       //console.log(items, 'items')
-      const bookData = items.data.map((book) => ({
-        bookId: book._id,
-        authors: book.status || ["No author to display"],
-        title: book.title,
-        description: book.synopsis,
-        image: book.image || "",
-        link: book.link,
+      const animeData = items.data.map((anime) => ({
+        animeId: anime._id,
+        authors: anime.status || ["No author to display"],
+        title: anime.title,
+        description: anime.synopsis,
+        image: anime.image || "",
+        link: anime.link,
       }));
 
-      // console.log(bookData, 'bookdata');
+      // console.log(animeData, 'bookdata');
 
-      setSearchedBooks(bookData);
+      setSearchedAnime(animeData);
       setSearchInput("");
     } catch (err) {
       console.error(err);
     }
   };
 
-  // create function to handle saving a book to our database
-  const handleSaveBook = async (bookId) => {
-    // find the book in `searchedBooks` state by the matching id
-    const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+  // create function to handle saving a anime to our database
+  const handleSaveAnime = async (animeId) => {
+    // find the anime in `searchedAnime` state by the matching id
+    const animeToSave = searchedAnime.find((anime) => anime.animeId === animeId);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -95,16 +95,16 @@ const SearchBooks = () => {
     }
 
     try {
-      const { data } = await saveBook({
-        variables: { input: { ...bookToSave } },
+      const { data } = await saveAnime({
+        variables: { input: { ...animeToSave } },
       });
 
       if (error) {
         throw new Error("something went wrong!");
       }
 
-      // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      // if anime successfully saves to user's account, save anime id to state
+      setSavedAnimeIds([...savedAnimeIds, animeToSave.animeId]);
     } catch (err) {
       console.error(err);
     }
@@ -124,7 +124,7 @@ const SearchBooks = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type="text"
                   size="lg"
-                  placeholder="Search for a book"
+                  placeholder="Search for a anime"
                 />
               </Col>
               <Col xs={12} md={4}>
@@ -139,35 +139,35 @@ const SearchBooks = () => {
 
       <Container>
         <h2>
-          {searchedBooks.length
-            ? `Viewing ${searchedBooks.length} results:`
-            : "Search for a book to begin"}
+          {searchedAnime.length
+            ? `Viewing ${searchedAnime.length} results:`
+            : "Search for a anime to begin"}
         </h2>
         <CardColumns>
-          {searchedBooks.map((book) => {
+          {searchedAnime.map((anime) => {
             return (
-              <Card key={book.bookId} border="dark">
-                {book.image ? (
+              <Card key={anime.animeId} border="dark">
+                {anime.image ? (
                   <Card.Img
-                    src={book.image}
-                    alt={`The cover for ${book.title}`}
+                    src={anime.image}
+                    alt={`The cover for ${anime.title}`}
                     variant="top"
                   />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
-                  <p className="small">Status: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
+                  <Card.Title>{anime.title}</Card.Title>
+                  <p className="small">Status: {anime.authors}</p>
+                  <Card.Text>{anime.description}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
-                      disabled={savedBookIds?.some(
-                        (savedBookId) => savedBookId === book.bookId
+                      disabled={savedAnimeIds?.some(
+                        (savedAnimeId) => savedAnimeId === anime.animeId
                       )}
                       className="btn-block btn-info"
-                      onClick={() => handleSaveBook(book.bookId)}
+                      onClick={() => handleSaveAnime(anime.animeId)}
                     >
-                      {savedBookIds?.some(
-                        (savedBookId) => savedBookId === book.bookId
+                      {savedAnimeIds?.some(
+                        (savedAnimeId) => savedAnimeId === anime.animeId
                       )
                         ? "This anime has already been saved!"
                         : "Save this Anime!"}
@@ -179,7 +179,7 @@ const SearchBooks = () => {
                     <button
                       onClick={(event) => {
                         event.preventDefault();
-                        handleOpenModal(book);
+                        handleOpenModal(anime);
                       }}
                     >
                       Details
@@ -211,4 +211,4 @@ const SearchBooks = () => {
   );
 };
 
-export default SearchBooks;
+export default SearchAnime;
