@@ -83,3 +83,31 @@ export const anime = (query) => {
   //   console.log(bookData) })
   // .catch(err => console.error(err));
 };
+
+export const manga = (query) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Accept": "application/vnd.api+json",
+      "Content-Type": "application/vnd.api+json",
+    },
+  };
+
+  return fetch(
+    `https://kitsu.io/api/edge/manga?filter[text]=${query}`,
+    options
+  );
+  // .then(response => response.json())
+  // .then(response => {console.log(response)
+  // const bookData = response.data.map(book => (
+  //     {
+  //     bookId: book._id,
+  //     authors: book.status || ["No author to display"],
+  //     title: book.title,
+  //     // description: book.volumeInfo.description,
+  //     image: book.image || "",
+  //   }
+  //   ))
+  //   console.log(bookData) })
+  // .catch(err => console.error(err));
+};
