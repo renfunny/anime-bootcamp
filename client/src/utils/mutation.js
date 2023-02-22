@@ -6,7 +6,7 @@ export const LOGIN_USER = gql`
       token
       user {
         _id
-        bookCount
+        animeCount
         email
         mangaCount
         reviews {
@@ -41,7 +41,7 @@ export const ADD_USER = gql`
       token
       user {
         _id
-        bookCount
+        animeCount
         email
         mangaCount
         reviews {
@@ -74,7 +74,7 @@ export const SAVE_ANIME = gql`
   mutation saveAnime($input: animeInput) {
     saveAnime(input: $input) {
       _id
-      bookCount
+      animeCount
       email
       mangaCount
       reviews {
@@ -108,7 +108,7 @@ export const REMOVE_ANIME = gql`
       _id
       username
       email
-      bookCount
+      animeCount
       mangaCount
       savedAnimes {
         animeId
@@ -140,7 +140,7 @@ export const SAVE_MANGA = gql`
       _id
       username
       email
-      bookCount
+      animeCount
       mangaCount
       savedAnimes {
         animeId
@@ -172,7 +172,7 @@ export const REMOVE_MANGA = gql`
       _id
       username
       email
-      bookCount
+      animeCount
       mangaCount
       savedAnimes {
         animeId
