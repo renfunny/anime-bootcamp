@@ -153,7 +153,7 @@ const TopManga = () => {
           <div className="modal">
             <div className="modal-content">
               <div className="modal-header">
-                <img src={selectedManga.modalImage}></img>
+                <img src={selectedManga.image}></img>
                 <div className="modal-headertext">
                   <h4 className="modal-title">{selectedManga.title}</h4>
                   <h6 className="modal-status">

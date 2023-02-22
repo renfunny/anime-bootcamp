@@ -197,7 +197,7 @@ const SearchManga = () => {
               <div className="modal-content">
                 <div className="modal-header">
                   <img
-                    src={selectedManga.Image}
+                    src={selectedManga.image}
                     className="modal-manga-image"
                   ></img>
                   <div className="modal-headertext">
