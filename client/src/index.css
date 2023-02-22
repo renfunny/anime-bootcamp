@@ -158,6 +158,66 @@ button.btn.btn-success.btn-lg {
   width: 100%;
 }
 
+
+
+/*Home Page Styling*/
+/*#00f2ff66*/
+.home-container{
+  flex-direction: column;
+  text-align: center;
+  margin: 75px;
+  flex-wrap: wrap;
+}
+.home-heading{
+  margin: 10px 0 10px 0;
+}
+
+.anime-section > div > h3{
+  padding: 15px;
+  font-size: 22px;
+}
+.home-carousel {
+  height: auto;
+  width: 700px;
+  overflow: hidden;
+}
+div.carousel-inner{
+  height: 600px;
+  width: 400px;
+  overflow: hidden;
+}
+.carousel-control-prev, .carousel-control-next{
+  visibility:hidden;
+}
+.home-carousel-item > img{
+  height: auto;
+  max-height: 600px;
+  width: 400px;
+  max-width: 500px;
+}
+.home-carousel-caption{
+  font-size: smaller;
+}
+
+.anime-section > div > h4{
+  font-size: 22px;
+  margin-top: 13px;
+  margin-bottom: 50px;
+}
+
+.anime-genre-link:hover{
+  color: #00f2ff66;
+}
+
+.manga-carousel-caption{
+  color: gray;
+}
+
+
+
+
+
+
 @media (min-width: 765px) {
   .card-columns .card {
     display: flex;
@@ -168,4 +228,12 @@ button.btn.btn-success.btn-lg {
   .card {
     max-width: 31%;
   }
+
+  .home-container{
+    flex-direction: column;
+    text-align: center;
+    margin: 50px;
+    flex-wrap: wrap;
+  }
+
 }
