@@ -8,6 +8,12 @@ import {
   Card,
   CardColumns,
 } from "react-bootstrap";
+import Auth from "../utils/auth";
+import { manga } from "../utils/API";
+import { getSavedMangaIds } from "../utils/localStorage";
+
+import { useMutation } from "@apollo/react-hooks";
+import { SAVE_MANGA } from "../utils/mutation";
 
 const TopManga = () => {
   const [top20Mangas, setTop20Manga] = useState([]);
@@ -15,6 +21,10 @@ const TopManga = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [selectedManga, setSelectedManga] = useState(null);
+
+  const [savedMangaIds, setSavedMangaIds] = useState(getSavedMangaIds());
+  //create state to hold saved mangas and possible erros
+  const [saveManga, { error }] = useMutation(SAVE_MANGA);
 
   const handleOpenModal = (manga) => {
     setSelectedManga(manga);
@@ -50,15 +60,41 @@ const TopManga = () => {
         title: manga.attributes.canonicalTitle,
         description: manga.attributes.synopsis,
         image: manga.attributes.posterImage.original || "",
-        modalImage: manga.attributes.posterImage.small || "",
         link: manga.links.self,
-        rating: manga.attributes.averageRating || "81.76",
       }));
 
       setTop20Manga(mangaData);
     }
     fetchData();
   }, []);
+
+  // create function to handle saving a manga to our database
+  const handleSaveManga = async (mangaId) => {
+    // find the manga in `searchedMangas` state by the matching id
+    const mangaToSave = top20Mangas.find((manga) => manga.mangaId === mangaId);
+
+    // get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const { data } = await saveManga({
+        variables: { input: { ...mangaToSave } },
+      });
+
+      if (error) {
+        throw new Error("something went wrong!");
+      }
+
+      // if manga successfully saves to user's account, save manga id to state
+      setSavedMangaIds([...savedMangaIds, mangaToSave.mangaId]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <>
@@ -82,7 +118,21 @@ const TopManga = () => {
                 <p className="small">Status: {manga.status}</p>
                 <Card.Text>{manga.description.slice(0, 100)}...</Card.Text>
                 <div className="card-buttons">
-                  {/* Added a button for the web page link */}
+                  {Auth.loggedIn() && (
+                    <Button
+                      disabled={savedMangaIds?.some(
+                        (savedMangaId) => savedMangaId === manga.mangaId
+                      )}
+                      className="btn-block btn-info"
+                      onClick={() => handleSaveManga(manga.mangaId)}
+                    >
+                      {savedMangaIds?.some(
+                        (savedMangaId) => savedMangaId === manga.mangaId
+                      )
+                        ? "This manga has already been saved!"
+                        : "Save this Manga!"}
+                    </Button>
+                  )}
 
                   <button
                     style={{ margin: "5px 0 0 0", border: "none" }}
