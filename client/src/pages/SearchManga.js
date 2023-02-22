@@ -10,21 +10,21 @@ import {
 } from "react-bootstrap";
 
 import Auth from "../utils/auth";
-import { saveBook, searchGoogleBooks, manga } from "../utils/API";
-import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
+import { manga } from "../utils/API";
+import { getSavedMangaIds } from "../utils/localStorage";
 
 import { useMutation } from "@apollo/react-hooks";
-import { SAVE_BOOK } from "../utils/mutation";
+import { SAVE_MANGA } from "../utils/mutation";
 
 const SearchManga = () => {
   // create state for holding returned google api data
-  const [searchedBooks, setSearchedBooks] = useState([]);
+  const [searchedMangas, setSearchedMangas] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState("");
   // create state to hold saved bookId values
-  const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+  const [savedMangaIds, setSavedMangaIds] = useState(getSavedMangaIds());
   //create state to hold saved books and possible erros
-  const [saveBook, { error }] = useMutation(SAVE_BOOK);
+  const [saveManga, { error }] = useMutation(SAVE_MANGA);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -77,7 +77,7 @@ const SearchManga = () => {
 
       // console.log(bookData, 'bookdata');
 
-      setSearchedBooks(mangaData);
+      setSearchedMangas(mangaData);
       setSearchInput("");
     } catch (err) {
       console.error(err);
@@ -85,9 +85,11 @@ const SearchManga = () => {
   };
 
   // create function to handle saving a book to our database
-  const handleSaveBook = async (bookId) => {
+  const handleSaveManga = async (mangaId) => {
     // find the book in `searchedBooks` state by the matching id
-    const bookToSave = searchedBooks.find((manga) => manga.mangaId === bookId);
+    const mangaToSave = searchedMangas.find(
+      (manga) => manga.mangaId === mangaId
+    );
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -97,8 +99,8 @@ const SearchManga = () => {
     }
 
     try {
-      const { data } = await saveBook({
-        variables: { input: { ...bookToSave } },
+      const { data } = await saveManga({
+        variables: { input: { ...mangaToSave } },
       });
 
       if (error) {
@@ -106,7 +108,7 @@ const SearchManga = () => {
       }
 
       // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, bookToSave.mangaId]);
+      setSavedMangaIds([...savedMangaIds, mangaToSave.mangaId]);
     } catch (err) {
       console.error(err);
     }
@@ -141,12 +143,12 @@ const SearchManga = () => {
 
       <Container>
         <h2>
-          {searchedBooks.length
-            ? `Viewing ${searchedBooks.length} results:`
-            : "Search for a book to begin"}
+          {searchedMangas.length
+            ? `Viewing ${searchedMangas.length} results:`
+            : "Search for a manga to begin"}
         </h2>
         <CardColumns>
-          {searchedBooks.map((manga) => {
+          {searchedMangas.map((manga) => {
             return (
               <Card key={manga.mangaId} border="dark">
                 {manga.image ? (
@@ -163,14 +165,14 @@ const SearchManga = () => {
                   <div className="card-buttons">
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={savedBookIds?.some(
-                          (savedBookId) => savedBookId === manga.mangaId
+                        disabled={savedMangaIds?.some(
+                          (savedMangaId) => savedMangaId === manga.mangaId
                         )}
                         className="btn-block btn-info"
-                        onClick={() => handleSaveBook(manga.mangaId)}
+                        onClick={() => handleSaveManga(manga.mangaId)}
                       >
-                        {savedBookIds?.some(
-                          (savedBookId) => savedBookId === manga.mangaId
+                        {savedMangaIds?.some(
+                          (savedMangaId) => savedMangaId === manga.mangaId
                         )
                           ? "This manga has already been saved!"
                           : "Save this Manga!"}
