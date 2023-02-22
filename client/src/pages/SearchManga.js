@@ -21,9 +21,9 @@ const SearchManga = () => {
   const [searchedMangas, setSearchedMangas] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState("");
-  // create state to hold saved bookId values
+  // create state to hold saved mangaId values
   const [savedMangaIds, setSavedMangaIds] = useState(getSavedMangaIds());
-  //create state to hold saved books and possible erros
+  //create state to hold saved mangas and possible erros
   const [saveManga, { error }] = useMutation(SAVE_MANGA);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,14 +39,14 @@ const SearchManga = () => {
     setSelectedManga(null);
     setIsModalOpen(false);
   };
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
+  // set up useEffect hook to save `savedMangaIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => manga;
-    // saveBookIds(savedBookIds);
+    // savemangaIds(savedMangaIds);
   });
 
-  // create method to search for books and set state on form submit
+  // create method to search for mangas and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -63,19 +63,16 @@ const SearchManga = () => {
       }
 
       const items = await response.json();
-      console.log(items, "items");
       const mangaData = items.data.map((manga) => ({
         mangaId: manga.id,
         status: manga.attributes.status || ["No status to display"],
         title: manga.attributes.canonicalTitle,
         description: manga.attributes.synopsis,
         image: manga.attributes.posterImage.original || "",
-        modalImage: manga.attributes.posterImage.original || "",
         link: manga.links.self,
-        rating: manga.attributes.averageRating || "81.76",
       }));
 
-      // console.log(bookData, 'bookdata');
+      // console.log(mangaData, 'mangadata');
 
       setSearchedMangas(mangaData);
       setSearchInput("");
@@ -84,9 +81,9 @@ const SearchManga = () => {
     }
   };
 
-  // create function to handle saving a book to our database
+  // create function to handle saving a manga to our database
   const handleSaveManga = async (mangaId) => {
-    // find the book in `searchedBooks` state by the matching id
+    // find the manga in `searchedMangas` state by the matching id
     const mangaToSave = searchedMangas.find(
       (manga) => manga.mangaId === mangaId
     );
@@ -107,7 +104,7 @@ const SearchManga = () => {
         throw new Error("something went wrong!");
       }
 
-      // if book successfully saves to user's account, save book id to state
+      // if manga successfully saves to user's account, save manga id to state
       setSavedMangaIds([...savedMangaIds, mangaToSave.mangaId]);
     } catch (err) {
       console.error(err);
@@ -200,7 +197,7 @@ const SearchManga = () => {
               <div className="modal-content">
                 <div className="modal-header">
                   <img
-                    src={selectedManga.modalImage}
+                    src={selectedManga.Image}
                     className="modal-manga-image"
                   ></img>
                   <div className="modal-headertext">

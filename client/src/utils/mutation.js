@@ -6,26 +6,31 @@ export const LOGIN_USER = gql`
       token
       user {
         _id
-        username
+        bookCount
         email
-        animeCount
         mangaCount
+        reviews {
+          _id
+          reviewContent
+          reviewerName
+        }
         savedAnimes {
           animeId
-          title
           description
-          status
-          link
           image
+          link
+          status
+          title
         }
         savedMangas {
-          mangaId
-          title
           description
-          status
-          link
           image
+          link
+          mangaId
+          status
+          title
         }
+        username
       }
     }
   }
@@ -36,44 +41,64 @@ export const ADD_USER = gql`
       token
       user {
         _id
-        username
+        bookCount
         email
-        animeCount
         mangaCount
+        reviews {
+          _id
+          reviewContent
+          reviewerName
+        }
         savedAnimes {
           animeId
-          title
           description
-          status
-          link
           image
+          link
+          status
+          title
         }
         savedMangas {
-          mangaId
-          title
           description
-          status
-          link
           image
+          link
+          mangaId
+          status
+          title
         }
+        username
       }
     }
   }
 `;
 export const SAVE_ANIME = gql`
-  mutation saveAnime($input: animeInput!) {
+  mutation saveAnime($input: animeInput) {
     saveAnime(input: $input) {
       _id
-      username
+      bookCount
       email
+      mangaCount
+      reviews {
+        _id
+        reviewContent
+        reviewerName
+      }
       savedAnimes {
         animeId
-        title
         description
+        image
+        link
         status
+        title
+      }
+      savedMangas {
+        title
+        status
+        mangaId
         link
         image
+        description
       }
+      username
     }
   }
 `;
@@ -83,31 +108,60 @@ export const REMOVE_ANIME = gql`
       _id
       username
       email
-      animeCount
+      bookCount
+      mangaCount
       savedAnimes {
         animeId
-        title
-        description
         status
-        link
+        description
+        title
         image
+        link
+      }
+      savedMangas {
+        mangaId
+        status
+        description
+        title
+        image
+        link
+      }
+      reviews {
+        _id
+        reviewContent
+        reviewerName
       }
     }
   }
 `;
 export const SAVE_MANGA = gql`
-  mutation saveManga($input: mangaInput!) {
+  mutation saveManga($input: mangaInput) {
     saveManga(input: $input) {
       _id
       username
       email
+      bookCount
+      mangaCount
+      savedAnimes {
+        animeId
+        status
+        description
+        title
+        image
+        link
+      }
       savedMangas {
         mangaId
-        title
-        description
         status
-        link
+        description
+        title
         image
+        link
+      }
+      reviews {
+        _id
+        reviewContent
+        reviewerName
       }
     }
   }
@@ -118,14 +172,28 @@ export const REMOVE_MANGA = gql`
       _id
       username
       email
+      bookCount
       mangaCount
+      savedAnimes {
+        animeId
+        status
+        description
+        title
+        image
+        link
+      }
       savedMangas {
         mangaId
-        title
-        description
         status
-        link
+        description
+        title
         image
+        link
+      }
+      reviews {
+        _id
+        reviewContent
+        reviewerName
       }
     }
   }

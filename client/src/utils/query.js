@@ -6,23 +6,28 @@ export const GET_ME = gql`
       _id
       username
       email
-      animeCount
+      bookCount
       mangaCount
       savedAnimes {
         animeId
         status
-        image
         description
         title
+        image
         link
       }
       savedMangas {
         mangaId
         status
-        image
         description
         title
+        image
         link
+      }
+      reviews {
+        _id
+        reviewContent
+        reviewerName
       }
     }
   }

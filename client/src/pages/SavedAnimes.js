@@ -7,7 +7,6 @@ import {
   Button,
 } from "react-bootstrap";
 
-//import { getMe, deleteBook } from '../utils/API';
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { GET_ME } from "../utils/query";
 import { REMOVE_ANIME } from "../utils/mutation";
@@ -67,8 +66,6 @@ const SavedAnimes = () => {
       console.error(err);
     }
   };
-
-  console.log(data);
 
   // if data isn't here yet, say so
   if (loading) {

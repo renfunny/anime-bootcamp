@@ -37,7 +37,7 @@ const AppNavbar = () => {
               <Nav.Link as={Link} to="/topAnime">
                 Top Anime
               </Nav.Link>
-              {/* if user is logged in show saved books and logout */}
+              {/* if user is logged in show saved animes/mangas and logout */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to="/saved">

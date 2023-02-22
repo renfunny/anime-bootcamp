@@ -31,7 +31,7 @@ const TopManga = () => {
       const options = {
         method: "GET",
         headers: {
-          "Accept": "application/vnd.api+json",
+          Accept: "application/vnd.api+json",
           "Content-Type": "application/vnd.api+json",
         },
       };
@@ -43,7 +43,6 @@ const TopManga = () => {
         throw new Error("Something went wrong!");
       }
       const items = await response.json();
-      console.log(items);
 
       const mangaData = items.data.map((manga) => ({
         mangaId: manga.id,

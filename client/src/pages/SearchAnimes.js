@@ -21,9 +21,9 @@ const SearchAnimes = () => {
   const [searchedAnimes, setSearchedAnimes] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState("");
-  // create state to hold saved bookId values
+  // create state to hold saved animeId values
   const [savedAnimeIds, setSavedAnimeIds] = useState(getSavedAnimeIds());
-  //create state to hold saved books and possible erros
+  //create state to hold saved animes and possible erros
   const [saveAnime, { error }] = useMutation(SAVE_ANIME);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,14 +39,14 @@ const SearchAnimes = () => {
     setSelectedAnime(null);
     setIsModalOpen(false);
   };
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
+  // set up useEffect hook to save `savedAnimeIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => anime;
-    // saveBookIds(savedBookIds);
+    // saveanimeIds(savedAnimeIds);
   });
 
-  // create method to search for books and set state on form submit
+  // create method to search for animes and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -73,7 +73,7 @@ const SearchAnimes = () => {
         link: anime.link,
       }));
 
-      // console.log(bookData, 'bookdata');
+      // console.log(animeData, 'animedata');
 
       setSearchedAnimes(animeData);
       setSearchInput("");
@@ -82,9 +82,9 @@ const SearchAnimes = () => {
     }
   };
 
-  // create function to handle saving a book to our database
+  // create function to handle saving a anime to our database
   const handleSaveAnime = async (animeId) => {
-    // find the book in `searchedBooks` state by the matching id
+    // find the anime in `searchedAnimes` state by the matching id
     const animeToSave = searchedAnimes.find(
       (anime) => anime.animeId === animeId
     );
@@ -105,7 +105,7 @@ const SearchAnimes = () => {
         throw new Error("something went wrong!");
       }
 
-      // if book successfully saves to user's account, save book id to state
+      // if anime successfully saves to user's account, save anime id to state
       setSavedAnimeIds([...savedAnimeIds, animeToSave.animeId]);
     } catch (err) {
       console.error(err);
