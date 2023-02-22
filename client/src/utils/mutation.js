@@ -198,3 +198,4 @@ export const REMOVE_MANGA = gql`
     }
   }
 `;
+//module.exports = {LOGIN_USER, ADD_USER, SAVE_BOOK, REMOVE_BOOK};

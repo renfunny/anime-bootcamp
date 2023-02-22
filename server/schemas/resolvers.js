@@ -87,25 +87,67 @@ const resolvers = {
           { $pull: { reviews: review._id } }
         );
 
-                return review
-            }
-            throw new AuthenticationError('You need to be logged in!');
-        },
-        saveBook: async (parent, { input }, context) => {
-            if (context.user) {//this can only work if the user is logged in
-                const updatedUser = await User.findByIdAndUpdate({ _id: context.user._id }, { $addToSet: { savedBooks: input } }, { new: true });
-                return updatedUser;
-            }//if they are not logged in, they cannot use the feature
-            throw new AuthenticationError("You need to be logged in to use this feature!");
-        },
-        removeBook: async (parent, args, context) => {
-            if (context.user) {//this can only work if the user is logged in
-                const updatedUser = await User.findOneAndUpdate({ _id: context.user._id }, { $pull: { savedBooks: { bookId: args.bookId } } }, { new: true });
-                return updatedUser;
-            };//if they are not logged in, they cannot use the feature
-            throw new AuthenticationError("You need to be logged in to use this feature!");
-        }
-    }
+        return review;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    saveAnime: async (parent, { input }, context) => {
+      if (context.user) {
+        //this can only work if the user is logged in
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedAnimes: input } },
+          { new: true }
+        );
+        return updatedUser;
+      } //if they are not logged in, they cannot use the feature
+      throw new AuthenticationError(
+        "You need to be logged in to use this feature!"
+      );
+    },
+    removeAnime: async (parent, args, context) => {
+      if (context.user) {
+        //this can only work if the user is logged in
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedAnimes: { animeId: args.animeId } } },
+          { new: true }
+        );
+        return updatedUser;
+      } //if they are not logged in, they cannot use the feature
+      throw new AuthenticationError(
+        "You need to be logged in to use this feature!"
+      );
+    },
+    saveManga: async (parent, { input }, context) => {
+      if (context.user) {
+        //this can only work if the user is logged in
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedMangas: input } },
+          { new: true }
+        );
+        return updatedUser;
+      } //if they are not logged in, they cannot use the feature
+      throw new AuthenticationError(
+        "You need to be logged in to use this feature!"
+      );
+    },
+    removeManga: async (parent, args, context) => {
+      if (context.user) {
+        //this can only work if the user is logged in
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedMangas: { mangaId: args.mangaId } } },
+          { new: true }
+        );
+        return updatedUser;
+      } //if they are not logged in, they cannot use the feature
+      throw new AuthenticationError(
+        "You need to be logged in to use this feature!"
+      );
+    },
+  },
 };
 
 module.exports = resolvers;

@@ -6,13 +6,24 @@ const typeDefs = gql`
     username: String
     email: String
     bookCount: Int
-    savedBooks: [Book]
-    reviews:[Review]
-}
+    mangaCount: Int
+    savedAnimes: [Anime]
+    savedMangas: [Manga]
+    reviews: [Review]
+  }
 
-type Book{
-    bookId: String
-    authors: [String]
+  type Anime {
+    animeId: String
+    status: [String]
+    description: String
+    title: String
+    image: String
+    link: String
+  }
+
+  type Manga {
+    mangaId: String
+    status: [String]
     description: String
     title: String
     image: String
@@ -24,9 +35,18 @@ type Book{
     user: User
   }
 
-input booksInput {
-    bookId: String
-    authors: [String]
+  input animeInput {
+    animeId: String
+    status: [String]
+    description: String
+    title: String
+    image: String
+    link: String
+  }
+
+  input mangaInput {
+    mangaId: String
+    status: [String]
     description: String
     title: String
     image: String
@@ -41,19 +61,20 @@ input booksInput {
 
   type Query {
     me: User
-   reviews(username:String!):[Review]
-    review(reviewId:ID!):Review
-}
+    reviews(username: String!): [Review]
+    review(reviewId: ID!): Review
+  }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addReview(reviewContent:String!): Review
-    deleteReview(reviewId:ID!):Review
-    saveBook(input: booksInput): User
-    removeBook(bookId: String!): User
-}
-
+    addReview(reviewContent: String!): Review
+    deleteReview(reviewId: ID!): Review
+    saveAnime(input: animeInput): User
+    removeAnime(animeId: String!): User
+    saveManga(input: mangaInput): User
+    removeManga(mangaId: String!): User
+  }
 `;
 
 module.exports = typeDefs;
