@@ -10,43 +10,43 @@ import {
 } from "react-bootstrap";
 
 import Auth from "../utils/auth";
-import { manga } from "../utils/API";
-import { getSavedMangaIds } from "../utils/localStorage";
+import { anime } from "../utils/API";
+import { getSavedAnimeIds } from "../utils/localStorage";
 
 import { useMutation } from "@apollo/react-hooks";
-import { SAVE_MANGA } from "../utils/mutation";
+import { SAVE_ANIME } from "../utils/mutation";
 
-const SearchManga = () => {
+const SearchAnimes = () => {
   // create state for holding returned google api data
-  const [searchedMangas, setSearchedMangas] = useState([]);
+  const [searchedAnimes, setSearchedAnimes] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState("");
-  // create state to hold saved mangaId values
-  const [savedMangaIds, setSavedMangaIds] = useState(getSavedMangaIds());
-  //create state to hold saved mangas and possible erros
-  const [saveManga, { error }] = useMutation(SAVE_MANGA);
+  // create state to hold saved animeId values
+  const [savedAnimeIds, setSavedAnimeIds] = useState(getSavedAnimeIds());
+  //create state to hold saved animes and possible erros
+  const [saveAnime, { error }] = useMutation(SAVE_ANIME);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [selectedManga, setSelectedManga] = useState(null);
+  const [selectedAnime, setSelectedAnime] = useState(null);
 
-  const handleOpenModal = (manga) => {
-    setSelectedManga(manga);
+  const handleOpenModal = (anime) => {
+    setSelectedAnime(anime);
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setSelectedManga(null);
+    setSelectedAnime(null);
     setIsModalOpen(false);
   };
-  // set up useEffect hook to save `savedMangaIds` list to localStorage on component unmount
+  // set up useEffect hook to save `savedAnimeIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
-    return () => manga;
-    // savemangaIds(savedMangaIds);
+    return () => anime;
+    // saveanimeIds(savedAnimeIds);
   });
 
-  // create method to search for mangas and set state on form submit
+  // create method to search for animes and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -55,7 +55,7 @@ const SearchManga = () => {
     }
 
     try {
-      const response = await manga(searchInput);
+      const response = await anime(searchInput);
       // console.log(anime,'anime');
       // console.log(response,'response');
       if (!response.ok) {
@@ -63,29 +63,30 @@ const SearchManga = () => {
       }
 
       const items = await response.json();
-      const mangaData = items.data.map((manga) => ({
-        mangaId: manga.id,
-        status: manga.attributes.status || ["No status to display"],
-        title: manga.attributes.canonicalTitle,
-        description: manga.attributes.synopsis,
-        image: manga.attributes.posterImage.original || "",
-        link: manga.links.self,
+      //console.log(items, 'items')
+      const animeData = items.data.map((anime) => ({
+        animeId: anime._id,
+        status: anime.status || ["No status to display"],
+        title: anime.title,
+        description: anime.synopsis,
+        image: anime.image || "",
+        link: anime.link,
       }));
 
-      // console.log(mangaData, 'mangadata');
+      // console.log(animeData, 'animedata');
 
-      setSearchedMangas(mangaData);
+      setSearchedAnimes(animeData);
       setSearchInput("");
     } catch (err) {
       console.error(err);
     }
   };
 
-  // create function to handle saving a manga to our database
-  const handleSaveManga = async (mangaId) => {
-    // find the manga in `searchedMangas` state by the matching id
-    const mangaToSave = searchedMangas.find(
-      (manga) => manga.mangaId === mangaId
+  // create function to handle saving a anime to our database
+  const handleSaveAnime = async (animeId) => {
+    // find the anime in `searchedAnimes` state by the matching id
+    const animeToSave = searchedAnimes.find(
+      (anime) => anime.animeId === animeId
     );
 
     // get token
@@ -96,16 +97,16 @@ const SearchManga = () => {
     }
 
     try {
-      const { data } = await saveManga({
-        variables: { input: { ...mangaToSave } },
+      const { data } = await saveAnime({
+        variables: { input: { ...animeToSave } },
       });
 
       if (error) {
         throw new Error("something went wrong!");
       }
 
-      // if manga successfully saves to user's account, save manga id to state
-      setSavedMangaIds([...savedMangaIds, mangaToSave.mangaId]);
+      // if anime successfully saves to user's account, save anime id to state
+      setSavedAnimeIds([...savedAnimeIds, animeToSave.animeId]);
     } catch (err) {
       console.error(err);
     }
@@ -115,7 +116,7 @@ const SearchManga = () => {
     <>
       <Jumbotron fluid className="text-light bg-dark">
         <Container>
-          <h1>Search for Manga!</h1>
+          <h1>Search for Anime!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -125,7 +126,7 @@ const SearchManga = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type="text"
                   size="lg"
-                  placeholder="Search for a manga"
+                  placeholder="Search for an anime"
                 />
               </Col>
               <Col xs={12} md={4}>
@@ -140,39 +141,39 @@ const SearchManga = () => {
 
       <Container>
         <h2>
-          {searchedMangas.length
-            ? `Viewing ${searchedMangas.length} results:`
-            : "Search for a manga to begin"}
+          {searchedAnimes.length
+            ? `Viewing ${searchedAnimes.length} results:`
+            : "Search for an anime to begin"}
         </h2>
         <CardColumns>
-          {searchedMangas.map((manga) => {
+          {searchedAnimes.map((anime) => {
             return (
-              <Card key={manga.mangaId} border="dark">
-                {manga.image ? (
+              <Card key={anime.animeId} border="dark">
+                {anime.image ? (
                   <Card.Img
-                    src={manga.image}
-                    alt={`The cover for ${manga.title}`}
+                    src={anime.image}
+                    alt={`The cover for ${anime.title}`}
                     variant="top"
                   />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{manga.title}</Card.Title>
-                  <p className="small">Status: {manga.status}</p>
-                  <Card.Text>{manga.description.slice(0, 100)}...</Card.Text>
+                  <Card.Title>{anime.title}</Card.Title>
+                  <p className="small">Status: {anime.authors}</p>
+                  <Card.Text>{anime.description.slice(0, 100)}...</Card.Text>
                   <div className="card-buttons">
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={savedMangaIds?.some(
-                          (savedMangaId) => savedMangaId === manga.mangaId
+                        disabled={savedAnimeIds?.some(
+                          (savedAnimeId) => savedAnimeId === anime.animeId
                         )}
                         className="btn-block btn-info"
-                        onClick={() => handleSaveManga(manga.mangaId)}
+                        onClick={() => handleSaveAnime(anime.animeId)}
                       >
-                        {savedMangaIds?.some(
-                          (savedMangaId) => savedMangaId === manga.mangaId
+                        {savedAnimeIds?.some(
+                          (savedAnimeId) => savedAnimeId === anime.animeId
                         )
-                          ? "This manga has already been saved!"
-                          : "Save this Manga!"}
+                          ? "This anime has already been saved!"
+                          : "Save this Anime!"}
                       </Button>
                     )}
                     {/* Added a button for the web page link */}
@@ -182,7 +183,7 @@ const SearchManga = () => {
                       className="btn-block btn-info btn btn-primary"
                       onClick={(event) => {
                         event.preventDefault();
-                        handleOpenModal(manga);
+                        handleOpenModal(anime);
                       }}
                     >
                       Details
@@ -196,18 +197,22 @@ const SearchManga = () => {
             <div className="modal">
               <div className="modal-content">
                 <div className="modal-header">
-                  <img
-                    src={selectedManga.Image}
-                    className="modal-manga-image"
-                  ></img>
+                  <img src={selectedAnime.image}></img>
                   <div className="modal-headertext">
-                    <h4 className="modal-title">{selectedManga.title}</h4>
+                    <h4 className="modal-title">{selectedAnime.title}</h4>
                     <h6 className="modal-status">
-                      Status:{selectedManga.status}
+                      Status:{selectedAnime.status}
                     </h6>
                   </div>
                 </div>
-                <div className="modal-body">{selectedManga.description}</div>
+                <div className="modal-body">
+                  {selectedAnime.description} <br></br>
+                  For further details
+                  <a href={selectedAnime.link} target="_blank">
+                    {" "}
+                    Click here
+                  </a>
+                </div>
                 <div className="modal-footer">
                   <button onClick={handleCloseModal} className="close-btn">
                     Close
@@ -222,4 +227,4 @@ const SearchManga = () => {
   );
 };
 
-export default SearchManga;
+export default SearchAnimes;

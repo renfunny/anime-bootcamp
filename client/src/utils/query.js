@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 //queries are taken from graphql playground/localhost query tester and pasted here
 export const GET_ME = gql`
   query Me {
@@ -7,13 +7,17 @@ export const GET_ME = gql`
       animeCount
       email
       username
-      savedAnime {
-        animeId
+      email
+      bookCount
+      savedBooks{
+        bookId
         authors
+        image
         description
         image
         link
         title
+        link
       }
       reviews {
         _id
@@ -21,5 +25,6 @@ export const GET_ME = gql`
         reviewerName
       }
     }
-  }`;
+  }
+`;
 //module.exports = GET_ME;

@@ -7,15 +7,14 @@ import {
   Button,
 } from "react-bootstrap";
 
-//import { getMe, deleteBook } from '../utils/API';
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { GET_ME } from "../utils/query";
-import { REMOVE_MANGA } from "../utils/mutation";
+import { REMOVE_ANIME } from "../utils/mutation";
 import Auth from "../utils/auth";
-import { removeMangaId } from "../utils/localStorage";
+import { removeAnimeId } from "../utils/localStorage";
 
-const SavedMangas = () => {
-  const [removeManga, { error }] = useMutation(REMOVE_MANGA);
+const SavedAnimes = () => {
+  const [removeAnime, { error }] = useMutation(REMOVE_ANIME);
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || {};
 
@@ -47,8 +46,8 @@ const SavedMangas = () => {
   //   getUserData();
   // }, [userDataLength]);
 
-  // create function that accepts the manga's mongo _id value as param and deletes the manga from the database
-  const handleDeleteManga = async (mangaId) => {
+  // create function that accepts the anime's mongo _id value as param and deletes the anime from the database
+  const handleDeleteAnime = async (animeId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -56,13 +55,13 @@ const SavedMangas = () => {
     }
 
     try {
-      const { data } = await removeManga({ variables: { mangaId } });
+      const { data } = await removeAnime({ variables: { animeId } });
 
       if (error) {
         throw new Error("something went wrong!");
       }
-      // upon success, remove manga's id from localStorage
-      removeMangaId(mangaId);
+      // upon success, remove anime's id from localStorage
+      removeAnimeId(animeId);
     } catch (err) {
       console.error(err);
     }
@@ -78,37 +77,37 @@ const SavedMangas = () => {
     <>
       <Jumbotron fluid className="text-light bg-dark">
         <Container>
-          <h1>Viewing saved Manga!</h1>
+          <h1>Viewing saved Anime!</h1>
         </Container>
       </Jumbotron>
       <Container>
         <h2>
-          {userData?.savedMangas?.length
-            ? `Viewing ${userData?.savedMangas?.length} saved ${
-                userData?.savedMangas?.length === 1 ? "manga" : "mangas"
+          {userData?.savedAnimes?.length
+            ? `Viewing ${userData?.savedAnimes?.length} saved ${
+                userData?.savedAnimes?.length === 1 ? "anime" : "animes"
               }:`
-            : "You have no saved Manga!"}
+            : "You have no saved Anime!"}
         </h2>
         <CardColumns>
-          {userData?.savedMangas?.map((manga) => {
+          {userData?.savedAnimes?.map((anime) => {
             return (
-              <Card key={manga.mangaId} border="dark">
-                {manga.image ? (
+              <Card key={anime.animeId} border="dark">
+                {anime.image ? (
                   <Card.Img
-                    src={manga.image}
-                    alt={`The cover for ${manga.title}`}
+                    src={anime.image}
+                    alt={`The cover for ${anime.title}`}
                     variant="top"
                   />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{manga.title}</Card.Title>
-                  <p className="small">Status: {manga.status}</p>
-                  <Card.Text>{manga.description}</Card.Text>
+                  <Card.Title>{anime.title}</Card.Title>
+                  <p className="small">Status: {anime.status}</p>
+                  <Card.Text>{anime.description}</Card.Text>
                   <Button
                     className="btn-block btn-danger"
-                    onClick={() => handleDeleteManga(manga.mangaId)}
+                    onClick={() => handleDeleteAnime(anime.animeId)}
                   >
-                    Delete this Manga!
+                    Delete this Anime!
                   </Button>
                 </Card.Body>
               </Card>
@@ -120,4 +119,4 @@ const SavedMangas = () => {
   );
 };
 
-export default SavedMangas;
+export default SavedAnimes;
