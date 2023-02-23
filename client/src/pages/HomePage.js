@@ -142,7 +142,9 @@ const HomePage = () => {
                       20th Century Boys is a must read. I've never wanted to
                       uncover the truth behind a cult so badly before. Everytime
                       I thought it couldn't get crazier, it did. Kept my
-                      attention the whole time.{" "}
+                      attention the whole time. This is defininetly on par with
+                      Naoki Urasawa's "Monster". If you're looking for something to read, you simply cannot
+                      go wrong with this series.{" "}
                     </p>
                   </blockquote>
                 </Card.Body>
@@ -153,12 +155,66 @@ const HomePage = () => {
                   <blockquote className="blockquote mb-0">
                     <p>
                       {" "}
-                      Vinland Saga season 1 is a gripping anime that follows the
-                      journey of Thorfinn, a young Viking seeking revenge
-                      against his father's killer. With stunning visuals,
-                      intense action sequences, and complex character
+                      Vinland Saga has 2 seasons so far, each telling interesting
+                      parts of the main character's (Thorfinn) life as a viking. 
+                      With stunning visuals, intense action sequences, and complex character
                       development, this series is a must-watch for fans of
-                      historical and epic anime.{" "}
+                      historical and action anime.{" "}
+                    </p>
+                  </blockquote>
+                </Card.Body>
+              </Card>
+              <Card>
+                <Card.Header>Anmol (@anmolgupta313)</Card.Header>
+                <Card.Body>
+                  <blockquote className="blockquote mb-0">
+                    <p>
+                      {" "}
+                      I've learnt many life lessons through watching Naruto.
+                      The themes of friendship and hardwork run deep throughout the main story
+                      and character interactions. Each character provides an interesting take on something in life
+                      and it's never as simple as one person is bad or one person is good.{" "}
+                    </p>
+                  </blockquote>
+                </Card.Body>
+              </Card>
+              <Card>
+                <Card.Header>Vijithiran (@wiju24)</Card.Header>
+                <Card.Body>
+                  <blockquote className="blockquote mb-0">
+                    <p>
+                      {" "}
+                      Bluelock is an excellent anime to get your feet wet into the world of anime.
+                      This show makes an uneventful sport - like football - action-packed, suspenseful 
+                      but also makes you want to binge-watch in one sitting.
+                      The super powers each character has really makes the style of football fun and entertaining.{" "}
+                    </p>
+                  </blockquote>
+                </Card.Body>
+              </Card>
+              <Card>
+                <Card.Header>Abdallah (@abdallahnasseruoftdevop)</Card.Header>
+                <Card.Body>
+                  <blockquote className="blockquote mb-0">
+                    <p>
+                      {" "}
+                      Death Note was my first anime and it delivered on everything that was promised to me.
+                      Both the main character and "villian" are incredibly smart and it was so much fun watching
+                      the two try to out smart one another. If you like crime/investigative shows, this is a must watch{" "}
+                    </p>
+                  </blockquote>
+                </Card.Body>
+              </Card>
+              <Card>
+                <Card.Header>Icaro (@Kikolock)</Card.Header>
+                <Card.Body>
+                  <blockquote className="blockquote mb-0">
+                    <p>
+                      {" "}
+                      It's over 8000 !!! As an old school guy, I strongly recommend Dragon Ball, Specially the classic
+                      and Z seasons. You can watch multiple seasons without feeling old, because it's just amazing!
+                      As much as the fights last several episodes, they are still the best fights ever seen in anime.
+                      It's an anime with Humour, fights, family, fights, food, fights and more fights.{" "}
                     </p>
                   </blockquote>
                 </Card.Body>
