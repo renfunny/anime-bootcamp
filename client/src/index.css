@@ -172,6 +172,20 @@ button.btn.btn-success.btn-lg:active {
   margin-top: 1rem;
   margin-left: 1rem;
 }
+@media(max-width:1004px){
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .manga-section.row {
+    flex-direction: column-reverse;
+   }
+   
+   .card{
+    width: 100% !important;
+   }
+
+}
 
 @media (max-width: 991.98px) {
   .navbar-expand-lg > .container,
@@ -198,6 +212,25 @@ button.btn.btn-success.btn-lg:active {
 @media (max-width: 950px) {
   .modal-content {
     width: 70%;
+  }
+}
+
+@media (min-width: 765px) {
+  .card-columns .card {
+    display: flex;
+    width: 100%;
+    row-gap: 5px;
+    flex-wrap: wrap;
+  }
+  .card {
+    width: 100%;
+  }
+
+  .home-container {
+    flex-direction: column;
+    text-align: center;
+    margin: 50px;
+    flex-wrap: wrap;
   }
 }
 @media (max-width: 690px) {
@@ -327,30 +360,5 @@ div.carousel-inner {
     column-gap: 21px;
     row-gap: 15px;
  }
-@media(max-width:1004px){
-  .row {
-    flex-direction: column;
-    align-items: center;
-  }
-  .manga-section.row {
-    flex-direction: column-reverse;
-   }
-}
-@media (min-width: 765px) {
-  .card-columns .card {
-    display: flex;
-    width: 100%;
-    row-gap: 5px;
-    flex-wrap: wrap;
-  }
-  .card {
-    max-width: 31%;
-  }
 
-  .home-container {
-    flex-direction: column;
-    text-align: center;
-    margin: 50px;
-    flex-wrap: wrap;
-  }
-}
+
