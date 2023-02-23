@@ -133,6 +133,7 @@ const HomePage = () => {
           <div className="col-7">
             <h4>Staff Recommends</h4>
             <div className="container d-flex">
+              <div className="recommendation">
               <Card>
                 <Card.Header>Kush (@family60)</Card.Header>
                 <Card.Body>
@@ -164,6 +165,8 @@ const HomePage = () => {
                   </blockquote>
                 </Card.Body>
               </Card>
+              </div>
+              <div className="recommendation">
               <Card>
                 <Card.Header>Anmol (@anmolgupta313)</Card.Header>
                 <Card.Body>
@@ -192,6 +195,8 @@ const HomePage = () => {
                   </blockquote>
                 </Card.Body>
               </Card>
+              </div>
+              <div className="recommendation">
               <Card>
                 <Card.Header>Abdallah (@abdallahnasseruoftdevop)</Card.Header>
                 <Card.Body>
@@ -219,6 +224,7 @@ const HomePage = () => {
                   </blockquote>
                 </Card.Body>
               </Card>
+              </div>
             </div>
           </div>
 
