@@ -1,5 +1,5 @@
 body {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 
 h1,
@@ -8,10 +8,366 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Rubik Mono One', sans-serif;
+  font-family: "Rubik Mono One", sans-serif;
 }
 
+div#root {
+  background-color: #f5f6f6;
+  /* height: 100vh; */
+  height: 100vh;
+  overflow: auto;
+}
 .small {
   font-weight: 300;
   font-style: italic;
 }
+
+.container {
+  padding-top: 20px;
+}
+/* Modal */
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00f2ff66;
+}
+
+.modal-content button.btn.btn-success {
+  background-color: #00f2ff66;
+  border-color: #00f2ff66;
+}
+
+.modal-content {
+  width: 50%;
+  background-color: rgb(40, 37, 37);
+  box-shadow: 0px 6px 20px 4px #00f2ff66;
+  padding: 5px;
+  height: 100%;
+}
+
+.modal-headertext {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header .modal-footer {
+  padding: 10px;
+}
+
+.modal-header {
+  justify-content: flex-start;
+}
+
+.modal-header img {
+  max-width: 50%;
+}
+.modal-title {
+  margin: 10px;
+}
+
+.modal-status {
+  margin: 10px;
+}
+
+h6.modal-rating {
+  margin: 12px;
+}
+
+.modal-body {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  height: 100%;
+  overflow: auto;
+}
+
+.modal-manga-image {
+  max-width: 50%;
+}
+
+button.close-btn {
+  padding: 6px 20px;
+  background-color: #00f2ff66;
+  color: white;
+  border-radius: 3px;
+  border-color: #00f2ff66;
+}
+
+/* Login Signup */
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #00f2ff66;
+}
+
+.nav-item .nav-link {
+  color: #00f2fffe;
+}
+
+/* Navigations */
+
+.bg-dark {
+  background-color: black !important;
+}
+
+.navbar-nav {
+  column-gap: 10px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #00f2fffe;
+  font-size: 1.2rem;
+  transition-duration: 0.5s;
+}
+
+button.btn.btn-success.btn-lg {
+  background-color: #00f2ff66;
+  color: white;
+  border-radius: 3px;
+  border-color: #00f2ff66;
+}
+button.btn.btn-success.btn-lg:active {
+  background-color: #00f2ff66;
+  color: white;
+  border-radius: 3px;
+  border-color: #00f2ff66;
+}
+
+.navbar-dark .navbar-nav .nav-link:active {
+  color: yellow;
+}
+
+.logo-image img {
+  vertical-align: middle;
+  border-style: none;
+  width: 100%;
+}
+
+.container-fluid {
+  display: block !important;
+  height: 5rem;
+}
+
+.navbar-brand {
+  width: 4rem;
+  position: absolute;
+}
+.navbar-toggler {
+  float: right;
+  margin-top: 1rem;
+}
+.navbar-collapse {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.recommendation {
+  display: flex;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+@media(max-width:1004px){
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .manga-section.row {
+    flex-direction: column-reverse;
+   }
+   
+   .card{
+    width: 100% !important;
+   }
+
+}
+
+@media (max-width: 991.98px) {
+  .navbar-expand-lg > .container,
+  .navbar-expand-lg > .container-fluid,
+  .navbar-expand-lg > .container-lg,
+  .navbar-expand-lg > .container-md,
+  .navbar-expand-lg > .container-sm,
+  .navbar-expand-lg > .container-xl {
+    padding-right: 0;
+    padding-left: 0;
+    flex-wrap: nowrap;
+  }
+  .navbar-collapse {
+    margin-top: 1rem;
+    padding-top: 4rem;
+  }
+  .container-fluid {
+    display: block !important;
+    min-height: 5rem;
+    height: auto;
+  }
+}
+
+@media (max-width: 950px) {
+  .modal-content {
+    width: 70%;
+  }
+}
+
+@media (min-width: 765px) {
+  .recommendation{
+    flex-direction: column;
+  }
+  .card-columns .card {
+    display: flex;
+    width: 100%;
+    row-gap: 5px;
+    flex-wrap: wrap;
+  }
+  .card {
+    width: 100%;
+  }
+
+  .home-container {
+    flex-direction: column;
+    text-align: center;
+    margin: 50px;
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 690px) {
+  .modal-content {
+    width: 90%;
+  }
+  .modal-title {
+    font-size: 15px;
+  }
+  .modal-status {
+    font-size: 15px;
+  }
+}
+/* search manga and search anime */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+  row-gap: 13px;
+}
+
+/* Search Results */
+.card-columns {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card-columns .card {
+  display: flex;
+  width: 100%;
+  grid-row-gap: 5px;
+  row-gap: 5px;
+  flex-wrap: wrap;
+  border-color: transparent !important;
+  box-shadow: 0px 6px 16px -1px #00000024;
+  border-radius: 5px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-buttons {
+  width: 100%;
+}
+
+/*Home Page Styling*/
+/*#00f2ff66*/
+.home-container {
+  flex-direction: column;
+  text-align: center;
+  margin: 75px;
+  flex-wrap: wrap;
+}
+.home-heading {
+  margin: 10px 0 10px 0;
+}
+
+.anime-section > div > h3 {
+  padding: 15px;
+  font-size: 22px;
+}
+.home-carousel {
+  height: auto;
+  overflow: hidden;
+}
+div.carousel-inner {
+  height: 600px;
+  width: 400px;
+  overflow: hidden;
+}
+.carousel-control-prev,
+.carousel-control-next,
+.carousel-indicators {
+  visibility: hidden;
+}
+.home-carousel-item > img {
+  height: auto;
+  max-height: 600px;
+  width: 400px;
+  max-width: 500px;
+}
+.home-carousel-caption {
+  font-size: smaller;
+}
+
+.anime-section > div > h4 {
+  font-size: 22px;
+  margin-top: 13px;
+  margin-bottom: 50px;
+}
+
+.anime-genre-link:hover {
+  color: #00f2ff66;
+}
+
+.manga-carousel-caption {
+  color: gray;
+}
+
+.blockquote p {
+  font-size: 1rem;
+}
+.col-7 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.col-5 {
+  flex: 0 0 41.666667%;
+  max-width: 41.666667%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.d-flex {
+  display: flex!important;
+    flex-wrap: wrap;
+    column-gap: 21px;
+    row-gap: 15px;
+ }
+
+
