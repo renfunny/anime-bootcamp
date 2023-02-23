@@ -98,11 +98,11 @@ const TopManga = () => {
 
   return (
     <>
-      <div>
+      <div className="container">
         <h1>Top Manga</h1>
         <p>These are the highest rated Anime!</p>
       </div>
-      <CardColumns>
+      <CardColumns className="container">
         {top20Mangas.map((manga) => {
           return (
             <Card key={manga.mangaId} border="dark">
@@ -159,9 +159,9 @@ const TopManga = () => {
                   <h6 className="modal-status">
                     Status:{selectedManga.status}
                   </h6>
-                  <h6 className="modal-rating">
+                  {/* <h6 className="modal-rating">
                     Rating: {selectedManga.rating}
-                  </h6>
+                  </h6> */}
                 </div>
               </div>
               <div className="modal-body">{selectedManga.description}</div>

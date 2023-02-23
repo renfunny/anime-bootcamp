@@ -98,11 +98,11 @@ const TopAnimes = () => {
 
   return (
     <>
-      <div>
+      <div className="container">
         <h1>Top Anime</h1>
         <p>These are the highest rated Anime!</p>
       </div>
-      <CardColumns>
+      <CardColumns className="container">
         {top24Animes.map((anime) => {
           return (
             <Card key={anime.animeId} border="dark">

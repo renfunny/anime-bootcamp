@@ -11,11 +11,20 @@ h6 {
   font-family: "Rubik Mono One", sans-serif;
 }
 
+div#root {
+  background-color: #f5f6f6;
+  /* height: 100vh; */
+  height: 100vh;
+  overflow: auto;
+}
 .small {
   font-weight: 300;
   font-style: italic;
 }
 
+.container{
+  padding-top: 20px;
+}
 /* Modal */
 .modal {
   position: fixed;
@@ -40,6 +49,8 @@ h6 {
   background-color: rgb(40, 37, 37);
   box-shadow: 0px 6px 20px 4px #00f2ff66;
   padding: 5px;
+  height:100%
+
 }
 
 .modal-headertext {
@@ -51,6 +62,13 @@ h6 {
   padding: 10px;
 }
 
+.modal-header{
+  justify-content: flex-start;
+}
+
+.modal-header img{
+  max-width: 50%;
+}
 .modal-title {
   margin: 10px;
 }
@@ -59,10 +77,16 @@ h6 {
   margin: 10px;
 }
 
+h6.modal-rating {
+  margin: 12px;
+}
+
 .modal-body {
   padding: 10px;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
+  height:100%;
+  overflow:auto
 }
 
 .modal-manga-image {
@@ -115,6 +139,12 @@ button.btn.btn-success.btn-lg {
   border-radius: 3px;
   border-color: #00f2ff66;
 }
+button.btn.btn-success.btn-lg:active{
+  background-color: #00f2ff66;
+  color: white;
+  border-radius: 3px;
+  border-color: #00f2ff66;
+}
 
 .navbar-dark .navbar-nav .nav-link:active {
   color: yellow;
@@ -139,12 +169,48 @@ button.btn.btn-success.btn-lg {
   }
 }
 
+@media(max-width:950px){
+  .modal-content{
+    width: 70%;
+  }
+}
+@media(max-width:690px){
+  .modal-content{
+    width: 90%;
+  }
+  .modal-title{
+    font-size: 15px;
+  }
+  .modal-status{
+    font-size: 15px;
+  }
+}
+/* search manga and search anime */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+  row-gap: 13px;
+}
+
 /* Search Results */
 .card-columns {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.card-columns .card {
+  display: flex;
+  width: 100%;
+  grid-row-gap: 5px;
+  row-gap: 5px;
+  flex-wrap: wrap;
+  border-color: transparent !important;
+  box-shadow: 0px 6px 16px -1px #00000024;
+  border-radius: 5px;
 }
 
 .card-body {
