@@ -178,19 +178,18 @@ button.btn.btn-success.btn-lg:active {
   column-gap: 20px;
   row-gap: 20px;
 }
-@media(max-width:1004px){
+@media (max-width: 1004px) {
   .row {
     flex-direction: column;
     align-items: center;
   }
   .manga-section.row {
     flex-direction: column-reverse;
-   }
-   
-   .card{
-    width: 100% !important;
-   }
+  }
 
+  .card {
+    width: 100% !important;
+  }
 }
 
 @media (max-width: 991.98px) {
@@ -222,7 +221,7 @@ button.btn.btn-success.btn-lg:active {
 }
 
 @media (min-width: 765px) {
-  .recommendation{
+  .recommendation {
     flex-direction: column;
   }
   .card-columns .card {
@@ -272,7 +271,7 @@ button.btn.btn-success.btn-lg:active {
 
 .card-columns .card {
   display: flex;
-  width: 100%;
+  width: 32%;
   grid-row-gap: 5px;
   row-gap: 5px;
   flex-wrap: wrap;
@@ -364,10 +363,8 @@ div.carousel-inner {
   align-items: center;
 }
 .d-flex {
-  display: flex!important;
-    flex-wrap: wrap;
-    column-gap: 21px;
-    row-gap: 15px;
- }
-
-
+  display: flex !important;
+  flex-wrap: wrap;
+  column-gap: 21px;
+  row-gap: 15px;
+}
