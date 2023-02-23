@@ -304,6 +304,10 @@ div.carousel-inner {
   color: gray;
 }
 
+.blockquote p {
+  font-size: 1rem;
+}
+
 @media (min-width: 765px) {
   .card-columns .card {
     display: flex;
