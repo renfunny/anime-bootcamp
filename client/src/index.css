@@ -123,7 +123,26 @@ button.btn.btn-success.btn-lg {
 .logo-image img {
   vertical-align: middle;
   border-style: none;
-  width: 15%;
+  width: 100%;
+}
+
+.navbar-brand {
+  position: absolute;
+  left: 1rem;
+  right: 90%;
+}
+
+.navbar-toggler {
+  margin-top: 2rem;
+}
+.navbar-brand {
+  width: 3rem;
+  /* position: absolute; */
+  right: 0;
+}
+
+.container-fluid {
+  display: block !important;
 }
 
 @media (max-width: 991.98px) {
@@ -136,6 +155,12 @@ button.btn.btn-success.btn-lg {
     padding-right: 0;
     padding-left: 0;
     flex-wrap: nowrap;
+  }
+  .navbar-brand {
+    max-width: 5rem;
+    /* position: absolute; */
+    right: 0;
+    left: 90%;
   }
 }
 
@@ -158,21 +183,19 @@ button.btn.btn-success.btn-lg {
   width: 100%;
 }
 
-
-
 /*Home Page Styling*/
 /*#00f2ff66*/
-.home-container{
+.home-container {
   flex-direction: column;
   text-align: center;
   margin: 75px;
   flex-wrap: wrap;
 }
-.home-heading{
+.home-heading {
   margin: 10px 0 10px 0;
 }
 
-.anime-section > div > h3{
+.anime-section > div > h3 {
   padding: 15px;
   font-size: 22px;
 }
@@ -181,42 +204,38 @@ button.btn.btn-success.btn-lg {
   width: 700px;
   overflow: hidden;
 }
-div.carousel-inner{
+div.carousel-inner {
   height: 600px;
   width: 400px;
   overflow: hidden;
 }
-.carousel-control-prev, .carousel-control-next{
-  visibility:hidden;
+.carousel-control-prev,
+.carousel-control-next {
+  visibility: hidden;
 }
-.home-carousel-item > img{
+.home-carousel-item > img {
   height: auto;
   max-height: 600px;
   width: 400px;
   max-width: 500px;
 }
-.home-carousel-caption{
+.home-carousel-caption {
   font-size: smaller;
 }
 
-.anime-section > div > h4{
+.anime-section > div > h4 {
   font-size: 22px;
   margin-top: 13px;
   margin-bottom: 50px;
 }
 
-.anime-genre-link:hover{
+.anime-genre-link:hover {
   color: #00f2ff66;
 }
 
-.manga-carousel-caption{
+.manga-carousel-caption {
   color: gray;
 }
-
-
-
-
-
 
 @media (min-width: 765px) {
   .card-columns .card {
@@ -229,11 +248,10 @@ div.carousel-inner{
     max-width: 31%;
   }
 
-  .home-container{
+  .home-container {
     flex-direction: column;
     text-align: center;
     margin: 50px;
     flex-wrap: wrap;
   }
-
 }

@@ -14,13 +14,13 @@ const AppNavbar = () => {
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Brand as={Link} to="/">
             <div className="logo-image">
               <img src={Image}></img>
             </div>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbar" />
-          <Navbar.Collapse id="navbar">
+          <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               <Nav.Link as={Link} to="/">
                 Home
