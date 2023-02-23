@@ -222,6 +222,9 @@ button.btn.btn-success.btn-lg:active {
 }
 
 @media (min-width: 765px) {
+  .recommendation{
+    flex-direction: column;
+  }
   .card-columns .card {
     display: flex;
     width: 100%;
