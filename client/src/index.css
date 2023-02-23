@@ -22,7 +22,7 @@ div#root {
   font-style: italic;
 }
 
-.container{
+.container {
   padding-top: 20px;
 }
 /* Modal */
@@ -49,8 +49,7 @@ div#root {
   background-color: rgb(40, 37, 37);
   box-shadow: 0px 6px 20px 4px #00f2ff66;
   padding: 5px;
-  height:100%
-
+  height: 100%;
 }
 
 .modal-headertext {
@@ -62,11 +61,11 @@ div#root {
   padding: 10px;
 }
 
-.modal-header{
+.modal-header {
   justify-content: flex-start;
 }
 
-.modal-header img{
+.modal-header img {
   max-width: 50%;
 }
 .modal-title {
@@ -85,8 +84,8 @@ h6.modal-rating {
   padding: 10px;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
-  height:100%;
-  overflow:auto
+  height: 100%;
+  overflow: auto;
 }
 
 .modal-manga-image {
@@ -129,8 +128,8 @@ button.close-btn {
 
 .navbar-dark .navbar-nav .nav-link:hover {
   color: #00f2fffe;
-  transform: scale(1.1);
-  transition-duration: 0.7s;
+  font-size: 1.2rem;
+  transition-duration: 0.5s;
 }
 
 button.btn.btn-success.btn-lg {
@@ -139,7 +138,7 @@ button.btn.btn-success.btn-lg {
   border-radius: 3px;
   border-color: #00f2ff66;
 }
-button.btn.btn-success.btn-lg:active{
+button.btn.btn-success.btn-lg:active {
   background-color: #00f2ff66;
   color: white;
   border-radius: 3px;
@@ -153,7 +152,25 @@ button.btn.btn-success.btn-lg:active{
 .logo-image img {
   vertical-align: middle;
   border-style: none;
-  width: 15%;
+  width: 100%;
+}
+
+.container-fluid {
+  display: block !important;
+  height: 5rem;
+}
+
+.navbar-brand {
+  width: 4rem;
+  position: absolute;
+}
+.navbar-toggler {
+  float: right;
+  margin-top: 1rem;
+}
+.navbar-collapse {
+  margin-top: 1rem;
+  margin-left: 1rem;
 }
 
 @media (max-width: 991.98px) {
@@ -167,21 +184,30 @@ button.btn.btn-success.btn-lg:active{
     padding-left: 0;
     flex-wrap: nowrap;
   }
+  .navbar-collapse {
+    margin-top: 1rem;
+    padding-top: 4rem;
+  }
+  .container-fluid {
+    display: block !important;
+    min-height: 5rem;
+    height: auto;
+  }
 }
 
-@media(max-width:950px){
-  .modal-content{
+@media (max-width: 950px) {
+  .modal-content {
     width: 70%;
   }
 }
-@media(max-width:690px){
-  .modal-content{
+@media (max-width: 690px) {
+  .modal-content {
     width: 90%;
   }
-  .modal-title{
+  .modal-title {
     font-size: 15px;
   }
-  .modal-status{
+  .modal-status {
     font-size: 15px;
   }
 }
@@ -224,21 +250,19 @@ button.btn.btn-success.btn-lg:active{
   width: 100%;
 }
 
-
-
 /*Home Page Styling*/
 /*#00f2ff66*/
-.home-container{
+.home-container {
   flex-direction: column;
   text-align: center;
   margin: 75px;
   flex-wrap: wrap;
 }
-.home-heading{
+.home-heading {
   margin: 10px 0 10px 0;
 }
 
-.anime-section > div > h3{
+.anime-section > div > h3 {
   padding: 15px;
   font-size: 22px;
 }
@@ -247,42 +271,38 @@ button.btn.btn-success.btn-lg:active{
   width: 700px;
   overflow: hidden;
 }
-div.carousel-inner{
+div.carousel-inner {
   height: 600px;
   width: 400px;
   overflow: hidden;
 }
-.carousel-control-prev, .carousel-control-next{
-  visibility:hidden;
+.carousel-control-prev,
+.carousel-control-next {
+  visibility: hidden;
 }
-.home-carousel-item > img{
+.home-carousel-item > img {
   height: auto;
   max-height: 600px;
   width: 400px;
   max-width: 500px;
 }
-.home-carousel-caption{
+.home-carousel-caption {
   font-size: smaller;
 }
 
-.anime-section > div > h4{
+.anime-section > div > h4 {
   font-size: 22px;
   margin-top: 13px;
   margin-bottom: 50px;
 }
 
-.anime-genre-link:hover{
+.anime-genre-link:hover {
   color: #00f2ff66;
 }
 
-.manga-carousel-caption{
+.manga-carousel-caption {
   color: gray;
 }
-
-
-
-
-
 
 @media (min-width: 765px) {
   .card-columns .card {
@@ -295,11 +315,10 @@ div.carousel-inner{
     max-width: 31%;
   }
 
-  .home-container{
+  .home-container {
     flex-direction: column;
     text-align: center;
     margin: 50px;
     flex-wrap: wrap;
   }
-
 }
