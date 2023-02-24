@@ -1,23 +1,9 @@
-require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const db = require("./config/connection");
 //const routes = require('./routes');
 const { ApolloServer } = require("apollo-server-express");
 const { typeDefs, resolvers } = require("./schemas");
-
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const uri = process.env.MONGO_DB_URI;
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
-});
-client.connect((err) => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
 
 const app = express();
 const PORT = process.env.PORT || 3001;
