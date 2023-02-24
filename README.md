@@ -83,7 +83,7 @@ OR
 
 Click on the link that is deployed from Heroku:
 ```
-
+https://anime-bootcamp.herokuapp.com/
 ```
 ## Socials
 
